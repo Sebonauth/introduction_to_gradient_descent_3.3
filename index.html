@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step-by-Step Walkthrough</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            font-size: 150%;
+        }
+        section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        h1, h3, h4 {
+            color: #333;
+            margin-top: 20px;
+        }
+        p, li {
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 20px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        .test-your-knowledge {
+            background-color: #e6ffe6;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .test-your-knowledge h3 {
+            color: #28a745;
+            font-size: 0.75em;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+        .check-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 15px;
+            color: #ffffff;
+            background-color: #28a745;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+        }
+        .continue-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 15px;
+            color: #ffffff;
+            background-color: #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <section id="section1">
+        <h1>Step-by-Step Walkthrough</h1>
+        <p>Let's break down the gradient descent algorithm into clear steps:</p>
+        <div class="continue-button" onclick="showNextSection(2)">Continue</div>
+    </section>
+
+    <section id="section2">
+        <p><strong>1. Initialize Parameters:</strong> Start with initial guesses for the model parameters (weights).</p>
+        <div class="continue-button" onclick="showNextSection(3)">Continue</div>
+    </section>
+
+    <section id="section3">
+        <p><strong>2. Compute the Loss:</strong> Calculate the loss function using the current parameters.</p>
+        <div class="continue-button" onclick="showNextSection(4)">Continue</div>
+    </section>
+
+    <section id="section4">
+        <p><strong>3. Compute the Gradient:</strong> Find the gradient of the loss function with respect to each parameter.</p>
+        <div class="continue-button" onclick="showNextSection(5)">Continue</div>
+    </section>
+
+    <section id="section5">
+        <p><strong>4. Update the Parameters:</strong> Adjust the parameters in the opposite direction of the gradient:</p>
+        <p>$$ w_{\\text{new}} = w_{\\text{old}} - \\alpha \\nabla L(w_{\\text{old}}) $$</p>
+        <p>Here, \\( \\alpha \\) is the learning rate, controlling the size of the steps.</p>
+        <div class="continue-button" onclick="showNextSection(6)">Continue</div>
+    </section>
+
+    <section id="section6">
+        <p><strong>5. Repeat:</strong> Go back to step 2 and repeat the process until convergence.</p>
+        <div class="continue-button" onclick="showNextSection(7)">Continue</div>
+    </section>
+
+    <section id="section7">
+        <p>This iterative process continues until the algorithm reaches a point where the loss cannot be minimized further, ideally finding the global minimum.</p>
+
+        <div class="test-your-knowledge">
+            <h3>Test Your Knowledge</h3>
+            <h4>Which step in the gradient descent algorithm involves calculating the direction to adjust the parameters?</h4>
+            <p>
+                <label><input type="radio" name="gradient-answer" value="option1"> Step 1: Initialize Parameters</label><br>
+                <label><input type="radio" name="gradient-answer" value="option2"> Step 2: Compute the Loss</label><br>
+                <label><input type="radio" name="gradient-answer" value="option3"> Step 3: Compute the Gradient</label><br>
+                <label><input type="radio" name="gradient-answer" value="option4"> Step 4: Update the Parameters</label>
+            </p>
+            <button class="check-button" onclick="checkAnswer()">Check</button>
+
+            <div id="result" style="display: none; margin-top: 10px; color: #28a745; font-weight: bold;">Correct!</div>
+            <div id="explanation" style="display: none; margin-top: 10px;">
+                <h4>Explanation</h4>
+                <p>The correct answer is <strong>Step 3: Compute the Gradient.</strong><br>Computing the gradient tells us the direction of the steepest ascent, so we can move in the opposite direction.</p>
+            </div>
+        </div>
+
+        <div class="continue-button" onclick="showNextSection(8)">Continue</div>
+    </section>
+
+    <script>
+        document.getElementById("section1").style.display = "block";
+        document.getElementById("section1").style.opacity = "1";
+
+        function showNextSection(nextSectionId) {
+            const currentButton = event.target;
+            const nextSection = document.getElementById("section" + nextSectionId);
+
+            currentButton.style.display = "none";
+            nextSection.style.display = "block";
+            setTimeout(() => nextSection.style.opacity = "1", 10);
+            setTimeout(() => nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 500);
+        }
+
+        function checkAnswer() {
+            const selectedAnswer = document.querySelector('input[name="gradient-answer"]:checked');
+            const result = document.getElementById("result");
+            const explanation = document.getElementById("explanation");
+            const checkButton = document.querySelector(".check-button");
+
+            if (selectedAnswer) {
+                checkButton.style.display = "none";
+
+                if (selectedAnswer.value === "option3") {
+                    result.style.display = "block";
+                } else {
+                    explanation.style.display = "block";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
